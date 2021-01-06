@@ -1,0 +1,2 @@
+getCurrentPosition();
+watchPosition();
