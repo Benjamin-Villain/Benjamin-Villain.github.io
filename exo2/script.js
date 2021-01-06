@@ -22,7 +22,7 @@ navigator.geolocation.getCurrentPosition(function(pos) {
     document.getElementById("vit").innerHTML = crd.speed;
     document.getElementById("ts").innerHTML = pos.timestamp;
 });
-wp = navigator.geolocation.watchPosition(function(pos) {
+navigator.geolocation.watchPosition(function(pos) {
     let crd = pos.coords;
     document.getElementById("long").innerHTML = crd.longitude;
     document.getElementById("lat").innerHTML = crd.latitude;
