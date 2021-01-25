@@ -1,6 +1,7 @@
 var lat = 24.886;
 var lon = -70.268;
-var macarte = null;
+
+
 function initMap() {
     macarte = L.map('map').setView([lat, lon], 5);
     L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/toner/{z}/{x}/{y}.{ext}', {
