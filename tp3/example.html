@@ -10,7 +10,8 @@
 
 		<script type="module">
 
-			import * as THREE from '../build/three.module.js';
+			import * as THREE from 'https://unpkg.com/three/build/three.module.js';
+
 
 			let camera, scene, renderer;
 			let mesh;
@@ -25,9 +26,9 @@
 
 				scene = new THREE.Scene();
 
-				const texture = new THREE.TextureLoader().load( 'textures/crate.gif' );
+				const texture = new THREE.TextureLoader().load( 'crate.gif' );
 
-				const geometry = new THREE.BoxBufferGeometry( 200, 200, 200 );
+				const geometry = new THREE.BoxGeometry( 200, 200, 200 );
 				const material = new THREE.MeshBasicMaterial( { map: texture } );
 
 				mesh = new THREE.Mesh( geometry, material );
@@ -40,7 +41,7 @@
 
 				//
 
-				window.addEventListener( 'resize', onWindowResize, false );
+				window.addEventListener( 'resize', onWindowResize );
 
 			}
 

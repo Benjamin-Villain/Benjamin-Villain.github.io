@@ -8,46 +8,61 @@
 		</style>
 	</head>
 	<body>
-		<script src="js/three.js"></script>
+        <script src="https://threejs.org/build/three.js"></script>
+		<script src="https://threejs.org/examples/js/controls/OrbitControls.js"></script>
+		<script src="https://threejs.org//examples/js/loaders/GLTFLoader.js"></script>
 		<script>
+
             //scene
 			const scene = new THREE.Scene();
             const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
+            camera.position.z = 2.5;
             const renderer = new THREE.WebGLRenderer();
             
             renderer.setSize( window.innerWidth, window.innerHeight );
             document.body.appendChild( renderer.domElement );
 
             //cube
-            const geometry = new THREE.BoxGeometry();
-            //const material = new THREE.MeshBasicMaterial( { color: 0xBD3030 } );
+            const geometry = new THREE.SphereGeometry()
+            const material = new THREE.MeshBasicMaterial( { color: 0xBD3030 } );
 
-            const texture = THREE.TextureLoader().load( 'rubikscube.jpg' );
-            const material = new THREE.MeshBasicMaterial( { map: texture } );
+            const texture = new THREE.TextureLoader().load( 'rubikscube.jpg' );
+            const materialTex = new THREE.MeshBasicMaterial( { map: texture } );
+            
+            const sphere = new THREE.Mesh( geometry, materialTex );
 
-            const cube = new THREE.Mesh( geometry, material );
+            scene.add( sphere );
+            const controls = new THREE.OrbitControls( camera, renderer.domElement );
+            // Instantiate a loader
+            const loader = new THREE.GLTFLoader();
+            loader.load(
+                'model/duck.gltf',
+                function(gltf) {
+                    scene.add(gltf.scene);
+                },
+                function(xhr) {
+                    console.log((xhr.loaded / xhr.total * 100)+ '% loaded');
+                },
+                function (error) {
+                    console.log('An error happened')
+                }
+            );
 
-            scene.add( new THREE.AmbientLight( 0x111111 ) );       
-            const directionalLight = new THREE.DirectionalLight( 0xffffff, 0.125 );
-            scene.add( directionalLight );        
-            pointLight = new THREE.PointLight( 0xffffff, 1 );
-               scene.add( pointLight );
-            scene.add( cube );
 
-            camera.position.z = 2.5;
-
-
+            // White directional light at half intensity shining from the top.
+			const directionalLight = new THREE.DirectionalLight( 0xffffff, 1.5 );
+			scene.add( directionalLight );
             //dessiner la scene 
             function animate() {
                 requestAnimationFrame( animate );
 
                 //tourner le cube
-                cube.rotation.x += 0.05;
-                cube.rotation.y += 0.05;
+                sphere.rotation.x += 0.03;
+                sphere.rotation.y += 0.03;
                 
 	            renderer.render( scene, camera );
             }
-                animate();
+            animate();
 
                 
         </script>
