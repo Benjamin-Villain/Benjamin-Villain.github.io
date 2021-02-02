@@ -26,7 +26,7 @@
             const geometry = new THREE.SphereGeometry()
             const material = new THREE.MeshBasicMaterial( { color: 0xBD3030 } );
 
-            const texture = new THREE.TextureLoader().load( 'rubikscube.jpg' );
+            const texture = new THREE.TextureLoader().load( 'image/rubikscube.jpg' );
             const materialTex = new THREE.MeshBasicMaterial( { map: texture } );
             
             const sphere = new THREE.Mesh( geometry, materialTex );
