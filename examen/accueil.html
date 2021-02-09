@@ -6,7 +6,10 @@
 </head>
 <link rel="stylesheet" type="text/css" href="style.css">
 
-<body>  
+<body> 
+    <script src="https://threejs.org/build/three.js"></script>
+	<script src="https://threejs.org/examples/js/controls/OrbitControls.js"></script>
+	<script src="https://threejs.org//examples/js/loaders/GLTFLoader.js"></script>
     <h1>Boussole</h1>
     <canvas id="myCanvas" width="200" height="200"></canvas>
     <svg
@@ -553,6 +556,7 @@
             rotationA(event.alpha)
             rotationB(event.alpha)
             rotationSvg(event.alpha)
+            rotationThree(event.alpha)
         }
 
         function rotationA(degrees){
@@ -582,6 +586,43 @@
             document.querySelector("#svg4220").style.transform = 'rotate('+ degrees +'deg)';
             document.querySelector("#compass").style.transform = 'rotate('+ degrees +'deg)';
         }
+
+        //three.js
+        //scene
+			const scene = new THREE.Scene();            
+            const renderer = new THREE.WebGLRenderer();
+            
+            renderer.setSize( window.innerWidth/2, window.innerHeight/2 );
+            document.body.appendChild( renderer.domElement );
+
+            //figure
+            const geometry = new THREE.ConeGeometry( 20, 60, 128 );
+            const texture = new THREE.TextureLoader().load( 'assets/crate.gif' );
+            const materialTex = new THREE.MeshBasicMaterial( { map: texture } );           
+            const sphere = new THREE.Mesh( geometry, materialTex );
+
+            
+
+			var light = new THREE.PointLight( 0xffffff );
+			var camera = new THREE.PerspectiveCamera( 50, window.innerWidth / window.innerHeight, 100, 5000 );
+
+			scene.add( sphere );
+			scene.add( camera );
+			camera.add(light);
+
+			camera.position.set( 150, 50, 0 );
+			camera.lookAt( sphere.position );
+
+            //dessiner la scene 
+            function animate() {
+                requestAnimationFrame( animate );
+
+	            renderer.render( scene, camera );
+            }
+            function rotateCone(degrees) {
+                cone.rotation.z = degrees;
+            }
+            animate();
 
 </script>
 </html>

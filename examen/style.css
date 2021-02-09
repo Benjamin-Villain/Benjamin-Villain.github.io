@@ -1,7 +1,12 @@
 svg {
     position: absolute;
+    
 }
 #svg4220 {
     margin-left: 190px;
     margin-top: 40px;
+}
+
+canvas {
+    margin-bottom: 250px;
 }
