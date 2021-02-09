@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Examen</title>
+</head>
+<body>  
+    <h1>Examen</h1>
+    <canvas id="myCanvas" width="200" height="200"></canvas>
+</body>
+<script>
+    window.addEventListener("deviceorientation", handleOrientation, true);
+
+    function handleOrientation(event) {
+    displayElement(event.gamma)
+    displayElement( event.beta)
+    displayElement( event.alpha)
+}
+
+    window.onload = function() {
+        var canvas = document.getElementById('myCanvas');
+        var ctx = canvas.getContext('2d');
+        ctx.fillStyle = 'grey';
+        ctx.fillRect(0, 0, 300, 300);
+
+        //fond
+        var img = new Image();
+        var needle = new Image();
+        
+        function init() {
+            img.src = 'assets/compass.png';
+            needle.src = 'assets/needle.png';
+            window.requestAnimationFrame(draw);
+        }
+
+        img.onload = function() {
+        ctx.drawImage(img, 0, 0);
+        }
+        needle.onload = function() {
+            ctx.rotate(event.gamma);
+            ctx.drawImage(needle,0,0);
+        }
+        init();
+      }
+</script>
+</html>
