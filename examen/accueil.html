@@ -559,10 +559,19 @@
             rotationThree(event.alpha)
         }
 
+        function rotationB(degrees){
+
+            ctx.clearRect(0,0,canvas.width,canvas.height);
+            ctx.save();
+            ctx.translate(canvas.width/2,canvas.height/2);
+            ctx.rotate(degrees * Math.PI/180);
+            ctx.drawImage(img,-img.width/2,-img.width/2)
+            ctx.restore()
+
+            }
         function rotationA(degrees){
 
             ctx.clearRect(0,0,canvas.width,canvas.height);
-            ctx.drawImage(img, 0, 0);
             ctx.save();
             ctx.translate(canvas.width/2,canvas.height/2);
             ctx.rotate(degrees * Math.PI/180);
@@ -570,17 +579,7 @@
             ctx.restore()
             
         }
-        function rotationB(degrees){
-
-            ctx.clearRect(0,0,canvas.width,canvas.height);
-            ctx.drawImage(img, 0, 0);
-            ctx.save();
-            ctx.translate(canvas.width/2,canvas.height/2);
-            ctx.rotate(degrees * Math.PI/180);
-            ctx.drawImage(img,-img.width/2,-img.width/2)
-            ctx.restore()
-            
-        }
+        
 
         function rotationSvg(degrees){
             document.querySelector("#svg4220").style.transform = 'rotate('+ degrees +'deg)';
@@ -616,12 +615,12 @@
             //dessiner la scene 
             function animate() {
                 requestAnimationFrame( animate );
-
+                function rotationThree(degrees) {
+                geometry.rotation.z = degrees * Math.PI/180;
+            }
 	            renderer.render( scene, camera );
             }
-            function rotationThree(degrees) {
-                geometry.rotation.z = THREE.Math.degToRad(-degrees);
-            }
+            
             animate();
 
 </script>
