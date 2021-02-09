@@ -620,7 +620,7 @@
 	            renderer.render( scene, camera );
             }
             function rotationThree(degrees) {
-                geometry.rotation.z = degrees * Math.PI/180;
+                geometry.rotation.z = THREE.Math.degToRad(-degrees);
             }
             animate();
 
