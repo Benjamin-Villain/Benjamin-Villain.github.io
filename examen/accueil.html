@@ -541,11 +541,11 @@
         needle.src = 'assets/needle.png';
 
         img.onload = function() {
-            rotationB(0)
+            rotation(0)
         }
         
         needle.onload =  function() {
-            rotationA(0)
+            rotation(0)
         }
 
         window.addEventListener("deviceorientation", handleOrientation, true);
@@ -586,29 +586,28 @@
             const geometry = new THREE.ConeGeometry( 20, 60, 128 );
             const texture = new THREE.TextureLoader().load( 'assets/crate.gif' );
             const materialTex = new THREE.MeshBasicMaterial( { map: texture } );           
-            const sphere = new THREE.Mesh( geometry, materialTex );
+            const figure = new THREE.Mesh( geometry, materialTex );
 
             
 
 			var light = new THREE.PointLight( 0xffffff );
 			var camera = new THREE.PerspectiveCamera( 50, window.innerWidth / window.innerHeight, 100, 5000 );
 
-			scene.add( sphere );
+			scene.add( figure );
 			scene.add( camera );
 			camera.add(light);
 
 			camera.position.set( 150, 50, 0 );
-			camera.lookAt( sphere.position );
+			camera.lookAt( figure.position );
 
             //dessiner la scene 
             function animate() {
                 requestAnimationFrame( animate );
-                function rotationThree(degrees) {
-                geometry.rotation.z = degrees * Math.PI/180;
-            }
 	            renderer.render( scene, camera );
             }
-            
+            function rotationThree(degrees) {
+                figure.rotation.z = degrees * Math.PI/180;
+            }
             animate();
 
 </script>
