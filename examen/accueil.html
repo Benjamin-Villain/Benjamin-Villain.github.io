@@ -607,7 +607,7 @@
             }
             function rotationThree(degrees) {
 
-                figure.rotation.x = THREE.Math.degToRad(-degrees);
+                figure.rotation.x = degrees * Math.PI/180;
 
 
             }
